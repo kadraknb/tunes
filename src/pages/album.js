@@ -22,7 +22,7 @@ class Album extends React.Component {
   fechGetinfoAlbums = async () => {
     const { match: { params: { id } } } = this.props;
     const album = await getMusics(id);
-    console.log(album);
+    // console.log(album);
     this.setState({
       infoAlbum: album[0],
       album,
