@@ -1,6 +1,6 @@
 import React from 'react';
 import Propstypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Carregando from './caregando';
 
 class MusicCard extends React.Component {
@@ -14,7 +14,7 @@ class MusicCard extends React.Component {
   }
 
   componentDidMount() {
-    this.favoriteSongs();
+    this.favoriteSongs({}, false);
   }
 
   getFavorite = async () => {
@@ -22,9 +22,10 @@ class MusicCard extends React.Component {
     this.setState({ addFavori });
   }
 
-  favoriteSongs = (aa) => {
+  favoriteSongs = (aa, e) => {
     this.setState({ loading: true }, async () => {
-      await addSong(aa);
+      const listen = e ? addSong : removeSong;
+      await listen(aa);
       await this.getFavorite();
       this.setState({ loading: false });
     });
@@ -43,7 +44,9 @@ class MusicCard extends React.Component {
     const favoritos = this.jaFavoritados(musicas);
     return (
       <ul>
-        { loading || !musicas[0] ? <Carregando /> : (
+        {loading ? (
+          <Carregando />
+        ) : (
           musicas.map((aa, ii) => (
             <li key={ aa.trackId }>
               <p>{aa.trackName}</p>
@@ -59,7 +62,10 @@ class MusicCard extends React.Component {
                   id={ aa.collectionId }
                   type="checkbox"
                   checked={ favoritos[ii] }
-                  onChange={ () => this.favoriteSongs(aa) }
+                  onChange={ (e) => {
+                    const { checked } = e.target;
+                    this.favoriteSongs(aa, checked);
+                  } }
                 />
               </label>
             </li>
