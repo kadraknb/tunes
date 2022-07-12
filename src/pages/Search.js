@@ -24,6 +24,7 @@ class Search extends React.Component {
 
   change = (aa) => {
     const { value } = aa.target;
+    console.log(value);
     this.setState({
       buscar: value,
       buttonOff: value.length < 2,
@@ -34,8 +35,9 @@ class Search extends React.Component {
     const { buscar } = this.state;
     aa.preventDefault();
     this.setState({ carregar: true });
+    console.log(buscar);
     const artista = await searchAlbumsAPI(buscar);
-    // console.log(artista);
+    console.log(artista);
     this.setState({
       artist: artista,
       nomeBusca: buscar,

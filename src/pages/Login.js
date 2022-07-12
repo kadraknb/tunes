@@ -18,16 +18,16 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      id: '',
-      buttonOff: true,
-      loading: false,
-      logado: false,
-    });
+    // this.setState({
+    //   id: '',
+    //   buttonOff: true,
+    //   loading: false,
+    //   logado: false,
+    // });
   }
 
   componentWillUnmount() {
-    this.setState({ loading: false, logado: false });
+    // this.setState({ loading: false, logado: false });
   }
 
   buttonOf = (value) => {
@@ -39,8 +39,8 @@ class Login extends React.Component {
     this.setState({ id: value }, this.buttonOf(value));
   };
 
-  submitF = async (e, id) => {
-    e.preventDefault();
+  submitF = (id) => {
+    // e.preventDefault();
     this.setState({ loading: true }, async () => {
       await createUser({ name: id });
       this.setState({ logado: true });
@@ -65,7 +65,7 @@ class Login extends React.Component {
             <button
               type="submit"
               disabled={ buttonOff }
-              onClick={ (e) => this.submitF(e, id) }
+              onClick={ () => this.submitF(id) }
               data-testid="login-submit-button"
             >
               Entrar

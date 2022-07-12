@@ -11,18 +11,21 @@ class Profile extends React.Component {
     this.state = {
       user: '',
       loading: true,
+      umaVez: true,
     };
   }
 
   componentDidMount() {
-    this.pegarId();
+    const { umaVez } = this.state;
+    if (umaVez) { this.pegarId(); }
   }
 
-  pegarId = () => {
-    this.setState({ loading: true }, async () => {
-      const user = await getUser();
-      this.setState({ user, loading: false });
-    });
+  pegarId = async () => {
+    const { user } = this.state;
+    if (!user) {
+      const sim = await getUser();
+      this.setState({ user: sim, loading: false, umaVez: false });
+    }
   }
 
   render() {
@@ -30,17 +33,14 @@ class Profile extends React.Component {
     return (
       <div data-testid="page-profile">
         <Header />
-        { loading ? <Carregando /> : (
-          <>
-            <h3>{ user.name }</h3>
-            <h3>{ user.email }</h3>
-            <img src={ user.image } data-testid="profile-image" alt={ user.name } />
-            <h5>{ user.description }</h5>
-            <Link to="/profile/edit">
-              <button type="button">Editar perfil</button>
-            </Link>
-          </>
-        ) }
+        { loading && <Carregando />}
+        <h3>{ user.name }</h3>
+        <h3>{ user.email }</h3>
+        <img src={ user.image } data-testid="profile-image" alt={ user.name } />
+        <h5>{ user.description }</h5>
+        <Link to="/profile/edit">
+          <button type="button">Editar perfil</button>
+        </Link>
       </div>
     );
   }
