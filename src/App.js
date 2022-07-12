@@ -17,13 +17,7 @@ class App extends React.Component {
     };
   }
 
-  // addId = (id) => {
-  //   this.setState({ id });
-  //   console.log(`${id}sss`);
-  // }
-
   render() {
-    // const { id } = this.state;
     return (
       <BrowserRouter>
         {/* { id && <Redirect to="/" /> } */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Propstypes from 'prop-types';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Carregando from './caregando';
 
 class MusicCard extends React.Component {
@@ -9,39 +9,27 @@ class MusicCard extends React.Component {
 
     this.state = {
       loading: true,
-      addFavori: [],
+      favoritos: [],
     };
   }
 
   componentDidMount() {
-    this.favoriteSongs({}, false);
+    this.getFavorite();
   }
 
-  getFavorite = async () => {
-    const addFavori = await getFavoriteSongs();
-    this.setState({ addFavori });
-  }
-
-  favoriteSongs = (aa, e) => {
+  getFavorite = () => {
+    const { musicas } = this.props;
     this.setState({ loading: true }, async () => {
-      const listen = e ? addSong : removeSong;
-      await listen(aa);
-      await this.getFavorite();
-      this.setState({ loading: false });
+      const addFavori = await getFavoriteSongs();
+      const favoritos = musicas.map((bb) => (
+        addFavori.some((cc) => cc.trackId === bb.trackId)));
+      this.setState({ favoritos, loading: false });
     });
   }
 
-  jaFavoritados = (aa) => {
-    const { addFavori } = this.state;
-    const favoritos = aa.map((bb) => (
-      addFavori.some((cc) => cc.trackId === bb.trackId)));
-    return favoritos;
-  }
-
   render() {
-    const { loading } = this.state;
-    const { musicas } = this.props;
-    const favoritos = this.jaFavoritados(musicas);
+    const { loading, favoritos } = this.state;
+    const { musicas, funOnChange } = this.props;
     return (
       <ul>
         {loading ? (
@@ -64,7 +52,7 @@ class MusicCard extends React.Component {
                   checked={ favoritos[ii] }
                   onChange={ (e) => {
                     const { checked } = e.target;
-                    this.favoriteSongs(aa, checked);
+                    funOnChange(aa, checked);
                   } }
                 />
               </label>
@@ -78,6 +66,7 @@ class MusicCard extends React.Component {
 
 MusicCard.propTypes = {
   musicas: Propstypes.arrayOf(Propstypes.object).isRequired,
+  funOnChange: Propstypes.func.isRequired,
 };
 
 export default MusicCard;
