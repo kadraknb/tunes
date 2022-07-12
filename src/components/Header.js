@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Carregando from './caregando';
-
-const { getUser } = require('../services/userAPI');
+import { getUser } from '../services/userAPI';
 
 class Header extends React.Component {
   constructor() {
