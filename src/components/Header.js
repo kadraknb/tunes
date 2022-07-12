@@ -30,7 +30,7 @@ class Header extends React.Component {
       <>
         <header data-testid="header-component">
           { !nome ? <Carregando />
-            : <p data-testid="header-user-name">{ `id: ${nome} ` }</p>}
+            : <p data-testid="header-user-name">{ nome }</p>}
         </header>
         <aside>
           <Link to="/search" data-testid="link-to-search"><p>search</p></Link>
