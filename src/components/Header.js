@@ -14,8 +14,9 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    const { seila } = this.state;
-    if (seila) { this.nome(); }
+    // const { seila } = this.state;
+    // if (seila) { this.nome(); }
+    this.nome();
   }
 
   nome = async () => {
@@ -24,16 +25,27 @@ class Header extends React.Component {
   }
 
   render() {
-    const { name } = this.state;
+    const { name, seila } = this.state;
     return (
       <header data-testid="header-component">
-        {!name ? <Carregando />
-          : <p data-testid="header-user-name">{name}</p>}
-        <aside>
-          <Link to="/search" data-testid="link-to-search"><p>search</p></Link>
-          <Link to="/favorites" data-testid="link-to-favorites"><p>favorites</p></Link>
-          <Link to="/profile" data-testid="link-to-profile"><p>profile</p></Link>
-        </aside>
+        {seila ? (
+          <Carregando />
+        ) : (
+          <div>
+            <p data-testid="header-user-name">{name}</p>
+            <aside>
+              <Link to="/search" data-testid="link-to-search">
+                <p>search</p>
+              </Link>
+              <Link to="/favorites" data-testid="link-to-favorites">
+                <p>favorites</p>
+              </Link>
+              <Link to="/profile" data-testid="link-to-profile">
+                <p>profile</p>
+              </Link>
+            </aside>
+          </div>
+        )}
       </header>
 
     );

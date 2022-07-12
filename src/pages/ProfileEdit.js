@@ -26,14 +26,13 @@ class ProfileEdit extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.submit();X
   }
 
   infoUser = async () => {
-    // this.setState({ loading: true }, async () => {wq
     const { name, email, description, image } = await getUser();
-    this.setState({ name, email, description, image, loading: false });
-    // });
+    this.setState({ name, email, description, image, loading: false }, () => {
+      this.disabled();
+    });
   }
 
     disabled = () => {
@@ -42,11 +41,9 @@ class ProfileEdit extends React.Component {
       this.setState({ disabled: test });
     }
 
-  submit = async (e) => {
-    e.preventDefault();
+  submit = async () => {
     const { name, email, description, image } = this.state;
     await updateUser({ name, email, description, image });
-    // this.setState({ sub: true });
   }
 
   change = (e) => {
@@ -56,10 +53,8 @@ class ProfileEdit extends React.Component {
 
   render() {
     const { name, email, description, image, disabled, loading, sub } = this.state;
-    // console.log(sub);
     return (
       <div data-testid="page-profile-edit">
-        {/* { sub && <Redirect to="/profile" /> } */}
         <Header />
         {loading ? (
           <Carregando />
@@ -103,12 +98,11 @@ class ProfileEdit extends React.Component {
                 data-testid="edit-button-save"
                 type="submit"
                 disabled={ disabled }
-                onClick={ (e) => this.submit(e) }
+                onClick={ () => this.submit() }
               >
                 { sub ? <Carregando /> : 'Salvar' }
               </button>
             </Link>
-
           </form>
         )}
       </div>

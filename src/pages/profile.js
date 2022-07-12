@@ -28,6 +28,8 @@ class Profile extends React.Component {
     }
   }
 
+  editarperfil = () => 'Editar perfil'
+
   render() {
     const { loading, user } = this.state;
     return (
@@ -39,7 +41,7 @@ class Profile extends React.Component {
         <img src={ user.image } data-testid="profile-image" alt={ user.name } />
         <h5>{ user.description }</h5>
         <Link to="/profile/edit">
-          <button type="button">Editar perfil</button>
+          <button type="button">{ this.editarperfil() }</button>
         </Link>
       </div>
     );
