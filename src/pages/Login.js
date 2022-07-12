@@ -1,8 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Carregando from '../components/caregando';
-
-const { createUser } = require('../services/userAPI');
+import { createUser } from '../services/userAPI';
 
 const N3 = 3;
 class Login extends React.Component {
@@ -17,61 +16,45 @@ class Login extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this.setState({
-    //   id: '',
-    //   buttonOff: true,
-    //   loading: false,
-    //   logado: false,
-    // });
-  }
-
-  componentWillUnmount() {
-    // this.setState({ loading: false, logado: false });
-  }
-
-  buttonOf = (value) => {
-    this.setState({ buttonOff: value.length < N3 });
-  };
-
   salvarId = (e) => {
     const { value } = e.target;
-    this.setState({ id: value }, this.buttonOf(value));
+    if (value.length >= N3) {
+      this.setState({
+        id: value,
+        buttonOff: false,
+      });
+    }
   };
 
-  submitF = (id) => {
-    // e.preventDefault();
-    this.setState({ loading: true }, async () => {
-      await createUser({ name: id });
-      this.setState({ logado: true });
-    });
+  submitF = async () => {
+    const { id } = this.state;
+    this.setState({ loading: true });
+    await createUser({ name: id });
+    this.setState({ logado: true, loading: false });
   };
 
   render() {
-    const { id, buttonOff, loading, logado } = this.state;
+    const { buttonOff, loading, logado } = this.state;
     return (
       <div data-testid="page-login">
+        { loading && <Carregando /> }
         {logado && <Redirect to="/search" />}
-        {loading ? (
-          <Carregando />
-        ) : (
-          <form>
-            <input
-              type="text"
-              onChange={ (e) => this.salvarId(e) }
-              value={ id }
-              data-testid="login-name-input"
-            />
-            <button
-              type="submit"
-              disabled={ buttonOff }
-              onClick={ () => this.submitF(id) }
-              data-testid="login-submit-button"
-            >
-              Entrar
-            </button>
-          </form>
-        )}
+        <form>
+          <input
+            type="text"
+            data-testid="login-name-input"
+            onChange={ this.salvarId }
+          />
+          <button
+            type="submit"
+            data-testid="login-submit-button"
+            disabled={ buttonOff }
+            onClick={ this.submitF }
+          >
+            Entrar
+          </button>
+        </form>
+
       </div>
     );
   }
