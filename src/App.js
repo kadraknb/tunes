@@ -7,23 +7,19 @@ import Favorites from './pages/favorites';
 import Profile from './pages/profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import './tuner.css'
+
 
 class App extends React.Component {
   constructor() {
     super();
-
-    this.state = {
-      // id: '',
-    };
   }
 
   render() {
     return (
       <BrowserRouter>
-        {/* { id && <Redirect to="/" /> } */}
         <Switch>
           <Route exact path="/" component={ Login } />
-          {/* <Route exact path="/" render={ () => <Login addId={ this.addId } /> } /> */}
           <Route path="/search" component={ Search } />
           <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
           <Route path="/favorites" component={ Favorites } />

@@ -25,87 +25,86 @@ class ProfileEdit extends React.Component {
     this.infoUser();
   }
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   infoUser = async () => {
     const { name, email, description, image } = await getUser();
     this.setState({ name, email, description, image, loading: false }, () => {
       this.disabled();
     });
-  }
+  };
 
-    disabled = () => {
-      const { state } = this;
-      const test = !Object.values(state).slice(0, N4).every((aa) => aa);
-      this.setState({ disabled: test });
-    }
+  disabled = () => {
+    const { state } = this;
+    const test = !Object.values(state)
+      .slice(0, N4)
+      .every((aa) => aa);
+    this.setState({ disabled: test });
+  };
 
   submit = async () => {
     const { name, email, description, image } = this.state;
     await updateUser({ name, email, description, image });
-  }
+  };
 
   change = (e) => {
     const { value, name } = e.target;
     this.setState({ [name]: value }, () => this.disabled());
-  }
+  };
 
   render() {
-    const { name, email, description, image, disabled, loading, sub } = this.state;
+    const { name, email, description, image, disabled, loading, sub } =
+      this.state;
     return (
-      <div data-testid="page-profile-edit">
+      <>
         <Header />
         {loading ? (
           <Carregando />
         ) : (
-          <form>
+          <form id="T_box_PEdit_Form">
             <input
-              data-testid="edit-input-name"
               placeholder="nome"
+              className="T_placeh T_boderStyle_input"
               type="text"
-              value={ name }
+              value={name}
               name="name"
-              onChange={ (e) => this.change(e) }
+              onChange={(e) => this.change(e)}
             />
             <input
-              data-testid="edit-input-email"
               placeholder="email"
+              className="T_placeh T_boderStyle_input"
               type="email"
-              value={ email }
+              value={email}
               name="email"
-              onChange={ (e) => this.change(e) }
+              onChange={(e) => this.change(e)}
               required
             />
             <input
-              data-testid="edit-input-description"
               placeholder="description"
+              className="T_placeh T_boderStyle_input"
               type="text"
-              value={ description }
+              value={description}
               name="description"
-              onChange={ (e) => this.change(e) }
+              onChange={(e) => this.change(e)}
             />
             <input
-              data-testid="edit-input-image"
               placeholder="UrlImage"
+              className="T_placeh T_boderStyle_input"
               type="text"
-              value={ image }
+              value={image}
               name="image"
-              onChange={ (e) => this.change(e) }
+              onChange={(e) => this.change(e)}
             />
-            <Link to="/profile">
-              <button
-                data-testid="edit-button-save"
-                type="submit"
-                disabled={ disabled }
-                onClick={ () => this.submit() }
-              >
-                { sub ? <Carregando /> : 'Salvar' }
-              </button>
-            </Link>
+            <button
+              type="submit"
+              disabled={disabled}
+              onClick={() => this.submit()}
+            >
+              {sub ? <Carregando /> : 'Salvar'}
+            </button>
           </form>
         )}
-      </div>
+      </>
     );
   }
 }

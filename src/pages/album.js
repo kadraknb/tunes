@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
@@ -23,7 +24,11 @@ class Album extends React.Component {
   }
 
   fechGetinfoAlbums = async () => {
-    const { match: { params: { id } } } = this.props;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
     const album = await getMusics(id);
     this.setState({
       infoAlbum: album[0],
@@ -31,7 +36,7 @@ class Album extends React.Component {
       artistName: album[0].artistName,
       loading: true,
     });
-  }
+  };
 
   favoriteSongs = (aa, e) => {
     this.setState({ loading: true }, async () => {
@@ -39,18 +44,25 @@ class Album extends React.Component {
       await listen(aa);
       this.setState({ loading: false });
     });
-  }
+  };
 
   render() {
     const { infoAlbum, artistName, album, loading } = this.state;
     return (
-      <div data-testid="page-album">
-        <Header />
-        <p data-testid="artist-name">{ artistName }</p>
-        <p data-testid="album-name">{ infoAlbum.collectionName }</p>
-        { loading ? <Carregando /> : (
-          <MusicCard musicas={ album.slice(1) } funOnChange={ this.favoriteSongs } />
-        ) }
+      <div>
+        <Header/>
+        <div id="T_A">
+          <h1 className="T_album_nome">{artistName}</h1>
+          <p>{infoAlbum.collectionName}</p>
+          {loading ? (
+            <Carregando />
+          ) : (
+            <MusicCard
+              musicas={album.slice(1)}
+              funOnChange={this.favoriteSongs}
+            />
+          )}
+        </div>
       </div>
     );
   }

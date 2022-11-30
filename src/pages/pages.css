@@ -1,0 +1,56 @@
+/* ///////login////// */
+#T-login {
+  margin: 0 auto;
+  padding-top: 20%;
+  width: fit-content;
+}
+#T-F_login{
+  width: 310px;
+  padding-left: 10px;
+}
+#T_F_login_button{
+  width: 70px;
+}
+/* //////////Search///////// */
+#T_F_search {
+  padding-left: 7px;
+  margin: 0 15px 25px 15px;
+  width: 317px;
+}
+#T_S_butoon {
+  width: 85px;
+}
+#T_sucado {
+  margin: 25px 15px;
+}
+#T_S_li {
+  list-style: none;
+  display: flex;
+  width: 300px;
+  margin-bottom: 20px;
+  box-shadow:  15px 10px 20px #3f3f3fc7;
+}
+#T_S_H3_resel {
+  margin-bottom: 30px;
+}
+/* /////////album////////// */
+#T_A .T_album_nome {
+  margin-left: 15px;
+}
+/* /////////perfil///////// */
+#T_Box_P {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#T_Box_P .T_box:hover {
+  background: linear-gradient(145deg, #71829e, #ffffff);
+  box-shadow:  20px 20px 60px #ffffff, -20px -20px 60px #ffffff;
+}
+/* ////////editi perfil ///////// */
+#T_box_PEdit_Form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

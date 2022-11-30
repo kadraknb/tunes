@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import './pages.css'
+
 import Carregando from '../components/caregando';
 import { createUser } from '../services/userAPI';
 
@@ -36,25 +37,25 @@ class Login extends React.Component {
   render() {
     const { buttonOff, loading, logado } = this.state;
     return (
-      <div data-testid="page-login">
+      <div id='T-login'>
         { loading && <Carregando /> }
-        {logado && <Redirect to="/search" />}
-        <form>
+        <form id='T-F_login' className='T_box'>
           <input
+            className='T_placeh T_boderStyle_input'
+            placeholder='digite seu nome aqui'
             type="text"
-            data-testid="login-name-input"
             onChange={ this.salvarId }
           />
           <button
+            id='T_F_login_button'
+            className='T_boderStyle'
             type="submit"
-            data-testid="login-submit-button"
             disabled={ buttonOff }
             onClick={ this.submitF }
           >
             Entrar
           </button>
         </form>
-
       </div>
     );
   }

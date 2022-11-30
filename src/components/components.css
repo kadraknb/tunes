@@ -1,0 +1,114 @@
+/* /////////header//////// */
+#T_header {
+  padding: 10px 10px 20px ;
+  border-bottom: 3px solid rgb(172, 172, 172);
+  margin-bottom: 30px;
+}
+#T_box_nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.T_nav{
+  margin: 0;
+  color: rgba(31, 31, 31, 0.753);
+  font-size: x-large;
+}
+.T_nav:hover {
+  background: linear-gradient(145deg, #71829e, #ffffff);
+  box-shadow:  20px 20px 60px #ffffff, -20px -20px 60px #ffffff;
+}
+/* //////////cardMusica/////////// */
+#T_box_all_play{
+  margin: 80px 35px 0;
+
+}
+#T_play {
+  width: 300px;
+  border-radius: 15px;
+  color: #71829e;
+  background: #f0f4f7;
+  box-shadow:  15px 10px 20px #71829e, -20px -20px 60px #ffffff;
+}
+#T_box_img {
+  margin-left: 75px;
+  position: fixed;
+  margin-top: -50px;
+}
+#T_img_musi {
+  border-radius: 15px;
+  width: 150px;
+  height: 150px;
+  filter: drop-shadow(0px 20px 15px #71829e);
+}
+#espaco {
+  margin-top: 50px;
+}
+#T_box_icon {
+  padding-top: 130px;
+}
+.T_icon {
+  width: 32px;
+  height: 32px;
+  margin-top: -10px;
+  margin: -10px 10px 0 15px ;
+  filter: drop-shadow(1px 1px 1px #71829e);
+}
+.T_icon:hover {
+  filter: drop-shadow(1px 1px 1px #f0f4f7) ;
+}
+#T_Icon_play{
+  margin-bottom: -18px;
+  margin-left: 43px;
+  filter: drop-shadow(1px 1px 1px #71829e) ;
+}
+#T_Icon_play:hover{
+  filter: drop-shadow(1px 1px 1px #f0f4f7);
+}
+#T_album_nome_id {
+  padding: 5px;
+}
+#T_volume {
+  background: #f0f4f7;
+  margin-left: 25px;
+  height: 20px;
+  -webkit-appearance: none;
+  width: 130px;
+}
+#T_volume::-webkit-slider-runnable-track {
+  height: 9px;
+  background: #cad4e6;
+  border-radius: 10px;
+  filter: drop-shadow(1px 1px 1px #71829e);
+
+}
+#T_volume::-webkit-slider-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  background: #cad4e6;
+  -webkit-appearance: none;
+  margin-top: -3px;
+}
+#T_volume:focus::-webkit-slider-runnable-track {
+  background: #71829e;
+}
+#T_Box_allmusi{
+  padding: 0;
+}
+#T_LI_mucas{
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  list-style: none;
+  display: flex;
+  margin-bottom: 20px;
+}
+#T_LI_mucas .T_icon{
+  margin: auto 0;
+}
+#T_Icon_play2{
+  margin: auto 0;
+  height: 32px;
+  width: 32px;
+}

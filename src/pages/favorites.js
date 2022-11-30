@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getFavoriteSongs, addSong, removeSong } from '../services/favoriteSongsAPI';
 import Carregando from '../components/caregando';
 import MusicCard from '../components/MusicCard';
@@ -37,7 +38,7 @@ class Favorites extends React.Component {
   render() {
     const { lista, loading } = this.state;
     return (
-      <div data-testid="page-favorites">
+      <div>
         <Header />
         { loading ? <Carregando /> : (
           <MusicCard musicas={ lista } funOnChange={ this.favoriteSongs } />

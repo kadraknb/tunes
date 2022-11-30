@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Carregando from './caregando';
 import { getUser } from '../services/userAPI';
+import './components.css';
 
 class Header extends React.Component {
   constructor() {
@@ -13,40 +14,37 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    // const { seila } = this.state;
-    // if (seila) { this.nome(); }
     this.nome();
   }
 
   nome = async () => {
     const { name } = await getUser();
     this.setState({ name, seila: false });
-  }
+  };
 
   render() {
     const { name, seila } = this.state;
     return (
-      <header data-testid="header-component">
+      <header className="T_box" id="T_header">
         {seila ? (
           <Carregando />
         ) : (
           <div>
-            <p data-testid="header-user-name">{name}</p>
+            <h2>Olá {name}</h2>
             <aside>
-              <Link to="/search" data-testid="link-to-search">
-                <p>search</p>
+              <Link to="/search">
+                <button className="T_box T_boderStyle T_nav">search</button>
               </Link>
-              <Link to="/favorites" data-testid="link-to-favorites">
-                <p>favorites</p>
+              <Link to="/favorites">
+                <button className="T_box T_boderStyle T_nav">Favorites</button>
               </Link>
-              <Link to="/profile" data-testid="link-to-profile">
-                <p>profile</p>
+              <Link to="/profile">
+                <button className="T_box T_boderStyle T_nav">Profile</button>
               </Link>
             </aside>
           </div>
         )}
       </header>
-
     );
   }
 }
