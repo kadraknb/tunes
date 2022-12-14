@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Carregando from '../components/caregando';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';

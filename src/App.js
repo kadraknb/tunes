@@ -11,12 +11,11 @@ import './tuner.css'
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
 
   render() {
     return (
+      <div id='tunerBody'>
+      <div id='mein_box'>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
@@ -29,6 +28,8 @@ class App extends React.Component {
           <Route path="/*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
+      </div>
+      </div>
     );
   }
 }

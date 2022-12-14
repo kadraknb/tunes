@@ -30,7 +30,7 @@ class Header extends React.Component {
           <Carregando />
         ) : (
           <div>
-            <h2>Olá {name}</h2>
+            <h2>{name}</h2>
             <aside>
               <Link to="/search">
                 <button className="T_box T_boderStyle T_nav">search</button>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Carregando from '../components/caregando';
 import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
-import imgP from '../../../images/T_imgPerfil.png'
+import imgP from '../images/T_imgPerfil.png'
 
 
 class Profile extends React.Component {

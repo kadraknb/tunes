@@ -44,7 +44,7 @@ class Search extends React.Component {
   render() {
     const { buscar, buttonOff, artist, nomeBusca, carregar } = this.state;
     return (
-      <div data-testid="page-search">
+      <div id="page_search">
         <Header />
         {carregar ? (
           <Carregando />
@@ -75,11 +75,11 @@ class Search extends React.Component {
             <h3 id="T_S_H3_resel">
               Resultado da busca de: <strong>{nomeBusca}</strong>
             </h3>
-            <ul>
+            <ul id='S_ul'>
               {artist.map((aa) => (
                 <li key={aa.collectionId} id="T_S_li" className="T_box">
-                  <Link to={`/album/${aa.collectionId}`}>
-                    <img src={aa.artworkUrl100} className="T_IMG_album" />
+                  <Link id="T_S_link" to={`/album/${aa.collectionId}`}>
+                    <img src={aa.artworkUrl100} className="T_IMG_album" alt='tumble' />
                     <div id="T_S_LI_names">
                       <p className="T_album_nome">{aa.collectionName}</p>
                       <p className="T_nome_fino T_album_nome">

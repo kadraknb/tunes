@@ -1,7 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './pages.css'
 
-import Carregando from '../components/caregando';
 import { createUser } from '../services/userAPI';
 
 const N3 = 3;
@@ -12,7 +12,6 @@ class Login extends React.Component {
     this.state = {
       id: '',
       buttonOff: true,
-      loading: false,
       logado: false,
     };
   }
@@ -27,20 +26,20 @@ class Login extends React.Component {
     }
   };
 
-  submitF = async () => {
+  submitF = async (e) => {
+    e.preventDefault()
     const { id } = this.state;
-    this.setState({ loading: true });
     await createUser({ name: id });
-    this.setState({ logado: true, loading: false });
+    this.setState({ logado: true });
   };
 
   render() {
-    const { buttonOff, loading, logado } = this.state;
+    const { buttonOff, logado } = this.state;
     return (
       <div id='T-login'>
-        { loading && <Carregando /> }
         <form id='T-F_login' className='T_box'>
           <input
+            id='L_F_input'
             className='T_placeh T_boderStyle_input'
             placeholder='digite seu nome aqui'
             type="text"
@@ -51,11 +50,12 @@ class Login extends React.Component {
             className='T_boderStyle'
             type="submit"
             disabled={ buttonOff }
-            onClick={ this.submitF }
-          >
+            onClick={ (e) => this.submitF(e) }
+            >
             Entrar
           </button>
         </form>
+            {logado && <Redirect to="/search" />}
       </div>
     );
   }
