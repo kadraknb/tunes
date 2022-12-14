@@ -1,14 +1,15 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
-import Carregando from '../components/caregando';
-import Header from '../components/Header';
-import { getUser, updateUser } from '../services/userAPI';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const N4 = 4;
+import Carregando from '../components/caregando'
+import Header from '../components/Header'
+import { getUser, updateUser } from '../services/userAPI'
+
+const N4 = 4
 
 class ProfileEdit extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
 
     this.state = {
       name: '',
@@ -17,54 +18,55 @@ class ProfileEdit extends React.Component {
       image: '',
       loading: true,
       disabled: true,
-      sub: false,
-    };
+      sub: false
+    }
   }
 
-  componentDidMount() {
-    this.infoUser();
+  componentDidMount () {
+    this.infoUser()
   }
-
-  componentWillUnmount() {}
 
   infoUser = async () => {
-    const { name, email, description, image } = await getUser();
+    const { name, email, description, image } = await getUser()
     this.setState({ name, email, description, image, loading: false }, () => {
-      this.disabled();
-    });
-  };
+      this.disabled()
+    })
+  }
 
   disabled = () => {
-    const { state } = this;
-    const test = !Object.values(state)
-      .slice(0, N4)
-      .every((aa) => aa);
-    this.setState({ disabled: test });
-  };
+    const { state } = this
+    const test = !Object.values(state).slice(0, N4).every((aa) => aa)
+    this.setState({ disabled: test })
+  }
 
   submit = async () => {
-    const { name, email, description, image } = this.state;
-    await updateUser({ name, email, description, image });
-  };
+    const { setRouter } = this.props
+    const { name, email, description, image } = this.state
+    await updateUser({ name, email, description, image })
+    setRouter('Profile')
+  }
 
   change = (e) => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value }, () => this.disabled());
-  };
+    const { value, name } = e.target
+    this.setState({ [name]: value }, () => this.disabled())
+  }
 
-  render() {
-    const { name, email, description, image, disabled, loading, sub } =
-      this.state;
+  render () {
+    const { name, email, description, image, disabled, loading, sub } = this.state
+    const { setRouter } = this.props
+
     return (
-      <>
-        <Header />
-        {loading ? (
+      <div>
+        <Header setRouter={setRouter} />
+        {loading
+          ? (
           <Carregando />
-        ) : (
-          <form id="T_box_PEdit_Form">
+            )
+          : (
+          <form id='T_box_PEdit_Form'>
             <input
               placeholder="nome"
-              className="T_placeh T_boderStyle_input"
+              className='T_placeh T_boderStyle_input'
               type="text"
               value={name}
               name="name"
@@ -72,7 +74,7 @@ class ProfileEdit extends React.Component {
             />
             <input
               placeholder="email"
-              className="T_placeh T_boderStyle_input"
+              className='T_placeh T_boderStyle_input'
               type="email"
               value={email}
               name="email"
@@ -81,7 +83,7 @@ class ProfileEdit extends React.Component {
             />
             <input
               placeholder="description"
-              className="T_placeh T_boderStyle_input"
+              className='T_placeh T_boderStyle_input'
               type="text"
               value={description}
               name="description"
@@ -89,7 +91,7 @@ class ProfileEdit extends React.Component {
             />
             <input
               placeholder="UrlImage"
-              className="T_placeh T_boderStyle_input"
+              className='T_placeh T_boderStyle_input'
               type="text"
               value={image}
               name="image"
@@ -103,10 +105,14 @@ class ProfileEdit extends React.Component {
               {sub ? <Carregando /> : 'Salvar'}
             </button>
           </form>
-        )}
-      </>
-    );
+            )}
+      </div>
+    )
   }
 }
 
-export default ProfileEdit;
+ProfileEdit.propTypes = {
+  setRouter: PropTypes.func.isRequired
+}
+
+export default ProfileEdit

@@ -45,7 +45,6 @@ class MusicCard extends React.Component {
   render() {
     const { loading, favoritos, playAtual, onPlay } = this.state;
     const { musicas, funOnChange } = this.props;
-    console.log(musicas);
     return (
       <>
         {loading ? (
