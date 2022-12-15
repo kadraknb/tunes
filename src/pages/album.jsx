@@ -44,11 +44,10 @@ class Album extends React.Component {
   }
 
   render () {
-    const { setRouter } = this.props
     const { artistName, album, loading } = this.state
     return (
       <>
-        <Header setRouter={setRouter} />
+        <Header />
         <div id='T_A'>
         <h1 className='T_album_nome'>{ artistName }</h1>
         { loading
@@ -63,8 +62,7 @@ class Album extends React.Component {
 }
 
 Album.propTypes = {
-  id: PropTypes.number,
-  setRouter: PropTypes.func.isRequired
+  id: PropTypes.number
 }
 
 export default Album

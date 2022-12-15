@@ -46,7 +46,7 @@ class Profile extends React.Component {
           <h3>{user.email}</h3>
           <img src={user.image || imgP} alt={user.name} />
           <h5>{user.description}</h5>
-          <Link to="/profile/edit">
+          <Link to="/tunes/profile/edit">
             <button className="T_box T_boderStyle" type="button">
               {this.editarperfil()}
             </button>

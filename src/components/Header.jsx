@@ -30,13 +30,13 @@ class Header extends React.Component {
           <div>
             <h2>{name}</h2>
             <aside>
-              <Link to="/search">
+              <Link to="/tunes/search">
                 <button className="T_box T_boderStyle T_nav">search</button>
               </Link>
-              <Link to="/favorites">
+              <Link to="/tunes/favorites">
                 <button className="T_box T_boderStyle T_nav">Favorites</button>
               </Link>
-              <Link to="/profile">
+              <Link to="/tunes/profile">
                 <button className="T_box T_boderStyle T_nav">Profile</button>
               </Link>
             </aside>

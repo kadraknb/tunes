@@ -25,8 +25,6 @@ class ProfileEdit extends React.Component {
     this.infoUser();
   }
 
-  componentWillUnmount() {}
-
   infoUser = async () => {
     const { name, email, description, image } = await getUser();
     this.setState({ name, email, description, image, loading: false }, () => {
@@ -95,13 +93,15 @@ class ProfileEdit extends React.Component {
               name="image"
               onChange={(e) => this.change(e)}
             />
-            <button
-              type="submit"
-              disabled={disabled}
-              onClick={() => this.submit()}
-            >
-              {sub ? <Carregando /> : 'Salvar'}
-            </button>
+            <Link to="/tunes/profile/edit">
+              <button
+                type="submit"
+                disabled={disabled}
+                onClick={() => this.submit()}
+              >
+                {sub ? <Carregando /> : 'Salvar'}
+              </button>
+            </Link>
           </form>
         )}
       </>

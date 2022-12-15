@@ -78,7 +78,7 @@ class Search extends React.Component {
             <ul id='S_ul'>
               {artist.map((aa) => (
                 <li key={aa.collectionId} id="T_S_li" className="T_box">
-                  <Link id="T_S_link" to={`/album/${aa.collectionId}`}>
+                  <Link id="T_S_link" to={`/tunes/album/${aa.collectionId}`}>
                     <img src={aa.artworkUrl100} className="T_IMG_album" alt='tumble' />
                     <div id="T_S_LI_names">
                       <p className="T_album_nome">{aa.collectionName}</p>

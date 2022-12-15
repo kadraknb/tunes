@@ -55,7 +55,7 @@ class Login extends React.Component {
             Entrar
           </button>
         </form>
-            {logado && <Redirect to="/search" />}
+            {logado && <Redirect to="/tunes/search" />}
       </div>
     );
   }
