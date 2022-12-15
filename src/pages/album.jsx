@@ -25,7 +25,7 @@ class Album extends React.Component {
   }
 
   fechGetinfoAlbums = async () => {
-    const id = window.location.pathname.slice(7)
+    const { id } = this.props
     const album = await getMusics(id)
     this.setState({
       infoAlbum: album[0],
@@ -44,10 +44,11 @@ class Album extends React.Component {
   }
 
   render () {
+    const { setRouter } = this.props
     const { artistName, album, loading } = this.state
     return (
       <>
-        <Header />
+        <Header setRouter={setRouter} />
         <div id='T_A'>
         <h1 className='T_album_nome'>{ artistName }</h1>
         { loading
@@ -62,7 +63,8 @@ class Album extends React.Component {
 }
 
 Album.propTypes = {
-  id: PropTypes.number
+  id: PropTypes.number,
+  setRouter: PropTypes.func.isRequired
 }
 
 export default Album

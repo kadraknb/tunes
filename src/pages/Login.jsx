@@ -1,45 +1,50 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
 import './pages.css'
 
-import { createUser } from '../services/userAPI';
+import Carregando from '../components/caregando'
+import { createUser } from '../services/userAPI'
 
-const N3 = 3;
+const N3 = 3
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
 
     this.state = {
       id: '',
       buttonOff: true,
-      logado: false,
-    };
+      loading: false,
+      logado: false
+    }
   }
 
   salvarId = (e) => {
-    const { value } = e.target;
+    const { value } = e.target
     if (value.length >= N3) {
       this.setState({
         id: value,
-        buttonOff: false,
-      });
+        buttonOff: false
+      })
     }
-  };
+  }
 
-  submitF = async (e) => {
+  submitF = (e) => {
     e.preventDefault()
-    const { id } = this.state;
-    await createUser({ name: id });
-    this.setState({ logado: true });
-  };
+    const { router } = this.props
+    const { id } = this.state
+    this.setState({ loading: true }, async () => {
+      await createUser({ name: id })
+      router('Search')
+    })
+  }
 
-  render() {
-    const { buttonOff, logado } = this.state;
+  render () {
+    const { buttonOff, loading } = this.state
     return (
       <div id='T-login'>
+        { loading && <Carregando /> }
         <form id='T-F_login' className='T_box'>
           <input
-            id='L_F_input'
             className='T_placeh T_boderStyle_input'
             placeholder='digite seu nome aqui'
             type="text"
@@ -50,15 +55,18 @@ class Login extends React.Component {
             className='T_boderStyle'
             type="submit"
             disabled={ buttonOff }
-            onClick={ (e) => this.submitF(e) }
-            >
+            onClick={ this.submitF }
+          >
             Entrar
           </button>
         </form>
-            {logado && <Redirect to="/tunes/search" />}
       </div>
-    );
+    )
   }
 }
 
-export default Login;
+Login.propTypes = {
+  router: PropTypes.func.isRequired
+}
+
+export default Login

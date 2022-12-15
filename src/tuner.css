@@ -3,7 +3,7 @@
   align-items: center;
   flex-direction: column;
   /* justify-content: center; */
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100%;
   background: #b9bdc554;
   color: #71829e;
@@ -12,13 +12,13 @@
 @media (max-width: 740px) {
   #tunerBody {
   zoom: 100%;
-
+  min-height: 100vh;
   }
 }
 @media (max-width: 350px) {
   #tunerBody {
   zoom: 80%;
-
+  min-height: 125vh;
   }
 }
 #mein_box {
@@ -51,7 +51,6 @@
 .T_album_nome {
   color: #71829e;
   font-family: 'Secular One', sans-serif;
-  font-: 
 }
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 .T_nome_fino {
