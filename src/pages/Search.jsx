@@ -1,55 +1,54 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import Header from '../components/Header'
-import searchAlbumsAPI from '../services/searchAlbumsAPI'
-import Carregando from '../components/caregando'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Carregando from '../components/caregando';
 
 class Search extends React.Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
 
     this.state = {
       buttonOff: true,
       buscar: '',
       nomeBusca: '',
       artist: [],
-      carregar: false
+      carregar: false,
+    };
   }
-  }
+
+  // buttonOf = () => {
+  // }
 
   change = (aa) => {
-    const { value } = aa.target
+    const { value } = aa.target;
     this.setState({
       buscar: value,
-      buttonOff: value.length < 2
-    })
-  }
+      buttonOff: value.length < 2,
+    });
+  };
 
   submit = async (aa) => {
-    const { buscar } = this.state
-    aa.preventDefault()
-    this.setState({ carregar: true })
-    const artista = await searchAlbumsAPI(buscar)
+    const { buscar } = this.state;
+    aa.preventDefault();
+    this.setState({ carregar: true });
+    const artista = await searchAlbumsAPI(buscar);
     this.setState({
       artist: artista,
       nomeBusca: buscar,
       buscar: '',
-      carregar: false
-    })
-  }
+      carregar: false,
+    });
+  };
 
-  render () {
-    const { router, setAlbum } = this.props
-    const { buscar, buttonOff, artist, nomeBusca, carregar } = this.state
+  render() {
+    const { buscar, buttonOff, artist, nomeBusca, carregar } = this.state;
     return (
-      <>
-        <Header setRouter={router} />
-        {carregar
-          ? (
+      <div id="page_search">
+        <Header />
+        {carregar ? (
           <Carregando />
-            )
-          : (
+        ) : (
           <form id="T_F_search" className="T_box">
             <span className="seila ">
               <input
@@ -71,44 +70,34 @@ class Search extends React.Component {
             </span>
           </form>
         )}
-        {artist[0]
-          ? (
+        {artist[0] ? (
           <div id="T_sucado">
             <h3 id="T_S_H3_resel">
               Resultado da busca de: <strong>{nomeBusca}</strong>
             </h3>
-            <ul>
+            <ul id='S_ul'>
               {artist.map((aa) => (
-                <li
-                  key={aa.collectionId}
-                  id="T_S_li"
-                  className="T_box"
-                  onClick={() => {
-                    setAlbum(aa.collectionId)
-                    router('Album')
-                  }}
-                >
+                <li key={aa.collectionId} id="T_S_li" className="T_box">
+                  <Link id="T_S_link" to={`/album/${aa.collectionId}`}>
                     <img src={aa.artworkUrl100} className="T_IMG_album" alt='tumble' />
                     <div id="T_S_LI_names">
                       <p className="T_album_nome">{aa.collectionName}</p>
-                    <p className="T_nome_fino T_album_nome">{aa.artistName}</p>
+                      <p className="T_nome_fino T_album_nome">
+                        {aa.artistName}
+                      </p>
                     </div>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
-            )
-          : (
+        ) : (
           nomeBusca && <p>Nenhum álbum foi encontrado</p>
         )}
-      </>
-    )
+        Search
+      </div>
+    );
   }
 }
 
-Search.propTypes = {
-  router: PropTypes.func.isRequired,
-  setAlbum: PropTypes.func.isRequired
-}
-
-export default Search
+export default Search;

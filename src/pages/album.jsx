@@ -25,7 +25,7 @@ class Album extends React.Component {
   }
 
   fechGetinfoAlbums = async () => {
-    const { id } = this.props
+    const id = window.location.pathname.slice(7)
     const album = await getMusics(id)
     this.setState({
       infoAlbum: album[0],

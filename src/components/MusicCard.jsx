@@ -47,7 +47,7 @@ class MusicCard extends React.Component {
     const { musicas, funOnChange } = this.props;
     return (
       <>
-        {loading ? (
+        {!musicas[0] ? (
           <Carregando />
         ) : (
           <div id="T_box_all_play">
