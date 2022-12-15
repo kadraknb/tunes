@@ -44,6 +44,14 @@ Criar links de navegação na aplicação com o componente Link;
 - React
 - React Router
 
+## 🚀 Instalação e execução
+
+1. Faça um clone desse repositório;
+2. Entre na pasta rodando `cd recipes-app`;
+3. Rode `npm install` para instalar as dependências;
+4. Rode `npm start` para iniciar.
+
+
 ## 📪 Contato
 
 - Email: [vagner_cardoso_s@outlook.com](vagner_cardoso_s@outlook.com)
