@@ -39,7 +39,8 @@ class ProfileEdit extends React.Component {
     this.setState({ disabled: test })
   }
 
-  submit = async () => {
+  submit = async (e) => {
+    e.preventDefault()
     const { setRouter } = this.props
     const { name, email, description, image } = this.state
     await updateUser({ name, email, description, image })
@@ -100,7 +101,7 @@ class ProfileEdit extends React.Component {
             <button
               type="submit"
               disabled={disabled}
-              onClick={() => this.submit()}
+              onClick={(e) => this.submit(e)}
             >
               {sub ? <Carregando /> : 'Salvar'}
             </button>
